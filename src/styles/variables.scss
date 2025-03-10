@@ -1,0 +1,53 @@
+// Colors
+$dark-bg: #050b1f;
+$text-light: rgba(255, 255, 255, 0.7);
+$text-dark: rgba(255, 255, 255, 0.4);
+$primary-color: #3b82f6;
+$secondary-color: #10b981;
+$card-bg: rgba(13, 18, 38, 0.8);
+$border-color: rgba(255, 255, 255, 0.1);
+
+// Gradients
+$gradient-primary: linear-gradient(90deg, $primary-color, $secondary-color);
+$gradient-secondary: linear-gradient(135deg, $primary-color, $secondary-color);
+
+// Shadows
+$shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+// Border radius
+$border-radius-sm: 4px;
+$border-radius-md: 8px;
+$border-radius-lg: 16px;
+
+// Transitions
+$transition-fast: 0.2s;
+$transition-normal: 0.3s;
+$transition-slow: 0.5s;
+
+// CSS Variables for theme support
+:root {
+  --color-primary: #{$primary-color};
+  --color-secondary: #{$secondary-color};
+  --color-background: #{$dark-bg};
+  --color-cardBackground: #{$card-bg};
+  --color-textPrimary: #{$text-light};
+  --color-textSecondary: #{$text-dark};
+  --color-border: #{$border-color};
+  
+  --gradient-primary: #{$gradient-primary};
+  --gradient-secondary: #{$gradient-secondary};
+  
+  --border-radius-sm: #{$border-radius-sm};
+  --border-radius-md: #{$border-radius-md};
+  --border-radius-lg: #{$border-radius-lg};
+  
+  --shadow-sm: #{$shadow-sm};
+  --shadow-md: #{$shadow-md};
+  --shadow-lg: #{$shadow-lg};
+  
+  --transition-fast: #{$transition-fast};
+  --transition-normal: #{$transition-normal};
+  --transition-slow: #{$transition-slow};
+}

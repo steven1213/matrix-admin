@@ -1,0 +1,243 @@
+@import '../../styles/variables.scss';
+
+.login-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-background);
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.03) 0%, rgba(0, 0, 0, 0) 70%);
+    z-index: 0;
+  }
+}
+
+.login-content {
+  position: relative;
+  width: 420px;
+  padding: 40px;
+  background: var(--color-cardBackground);
+  backdrop-filter: blur(10px);
+  border-radius: var(--border-radius-lg);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5),
+              0 0 0 1px var(--color-border);
+  z-index: 10;
+  animation: fadeIn 0.8s ease-out;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--gradient-primary);
+    border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
+    background-size: 200% 100%;
+    animation: gradientFlow 3s linear infinite;
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 10%;
+    width: 80%;
+    height: 10px;
+    background: rgba(59, 130, 246, 0.3);
+    filter: blur(10px);
+    border-radius: 50%;
+  }
+}
+
+.login-header {
+  margin-bottom: 30px;
+  text-align: center;
+  
+  .logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    
+    .logo-circle {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--gradient-secondary);
+      margin-right: 15px;
+      position: relative;
+      box-shadow: 0 0 15px rgba(var(--color-primary), 0.5);
+      
+      &::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: rgba(13, 18, 38, 0.8);
+      }
+      
+      &::after {
+        content: '';
+        position: absolute;
+        top: -3px;
+        left: -3px;
+        right: -3px;
+        bottom: -3px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        animation: pulse 2s infinite;
+      }
+    }
+    
+    .custom-logo {
+      width: 40px;
+      height: 40px;
+      margin-right: 15px;
+      object-fit: contain;
+    }
+    
+    h1 {
+      font-size: 28px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 1px;
+      text-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+      
+      span {
+        font-weight: 300;
+        opacity: 0.8;
+      }
+    }
+  }
+  
+  .tagline {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 14px;
+    letter-spacing: 1px;
+    position: relative;
+    display: inline-block;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 30px;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
+    }
+  }
+}
+
+.login-footer {
+  margin-top: 30px;
+  text-align: center;
+  position: relative;
+  
+  .tech-line {
+    height: 1px;
+    background: linear-gradient(90deg, 
+      rgba(255, 255, 255, 0) 0%, 
+      rgba(255, 255, 255, 0.3) 50%, 
+      rgba(255, 255, 255, 0) 100%);
+    margin-bottom: 15px;
+    position: relative;
+    
+    &::before, &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: rgba(59, 130, 246, 0.8);
+      transform: translateY(-50%);
+    }
+    
+    &::before {
+      left: 30%;
+    }
+    
+    &::after {
+      right: 30%;
+    }
+  }
+  
+  p {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 12px;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  70% {
+    transform: scale(1.1);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+.top-controls {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 20;
+  
+  .control-group {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    align-items: center;
+    
+    > * {
+      flex-shrink: 0; // 防止元素被压缩
+      min-width: auto; // 确保元素有足够的空间
+    }
+  }
+}
