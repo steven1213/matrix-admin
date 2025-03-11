@@ -1,0 +1,77 @@
+/* 全局基础样式 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--color-background);
+  color: var(--color-textPrimary);
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+:root {
+  /* 默认亮色主题变量 */
+  --color-background: #f5f7fa;
+  --color-cardBackground: rgba(255, 255, 255, 0.8);
+  --color-textPrimary: #333;
+  --color-textSecondary: #666;
+  --color-primary: #4a6cf7;
+  --color-primary-rgb: 74, 108, 247;
+  --color-secondary: #6c757d;
+  --color-success: #28a745;
+  --color-danger: #dc3545;
+  --color-warning: #ffc107;
+  --color-info: #17a2b8;
+  --color-border: rgba(0, 0, 0, 0.1);
+  --gradient-primary: linear-gradient(135deg, #4a6cf7 0%, #7e8fff 100%);
+  --gradient-secondary: linear-gradient(135deg, #6c757d 0%, #9aa0a6 100%);
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+}
+
+/* 当body添加dark-theme类时应用暗色主题变量 */
+body.dark-theme {
+  --color-background: #1a1d23;
+  --color-cardBackground: rgba(30, 34, 42, 0.8);
+  --color-textPrimary: #e6e6e6;
+  --color-textSecondary: #a0a0a0;
+  --color-border: rgba(255, 255, 255, 0.1);
+}
+
+/* 实用工具类 */
+.text-center {
+  text-align: center;
+}
+
+.mt-1 { margin-top: 0.25rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-3 { margin-top: 1rem; }
+.mt-4 { margin-top: 1.5rem; }
+.mt-5 { margin-top: 3rem; }
+
+.mb-1 { margin-bottom: 0.25rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-3 { margin-bottom: 1rem; }
+.mb-4 { margin-bottom: 1.5rem; }
+.mb-5 { margin-bottom: 3rem; }
+
+/* 图标字体 */
+.icon {
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+}

@@ -227,17 +227,41 @@
   position: absolute;
   top: 20px;
   right: 20px;
-  z-index: 20;
+  z-index: 20; // 取消注释
+  display: flex;
+  flex-direction: row; // 取消注释
+  align-items: center; // 确保垂直居中对齐
+  gap: 50px; // 控件之间的间距
   
-  .control-group {
+  .theme-selector,
+  .language-dropdown {
+    position: relative;
+    height: 40px; // 统一高度
     display: flex;
-    flex-direction: row;
-    gap: 15px;
     align-items: center;
     
-    > * {
-      flex-shrink: 0; // 防止元素被压缩
-      min-width: auto; // 确保元素有足够的空间
+    .dropdown-menu {
+      right: 0;
+    }
+  }
+  
+  // // 确保下拉菜单不会相互覆盖
+  // .language-dropdown {
+  //   .dropdown-menu {
+  //     z-index: 21; // 语言下拉菜单层级高一点
+  //   } 
+  // }
+  
+  .theme-selector {
+    position: relative;
+    height: 40px; // 统一高度
+    display: flex;
+    align-items: center;
+    .theme-menu {
+      z-index: 20; // 取消注释
+      position: absolute; // 添加绝对定位
+      top: 100%;
+      right: 0;
     }
   }
 }

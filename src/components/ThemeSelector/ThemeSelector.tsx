@@ -1,78 +1,54 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { useTheme, ThemeConfig } from '../../contexts/ThemeContext';
+import React from 'react';
+import { useTheme } from '../../contexts/ThemeContext';
 import './ThemeSelector.scss';
 
 interface ThemeSelectorProps {
-  label: string;
+  label?: string;
 }
 
-export const ThemeSelector: React.FC<ThemeSelectorProps> = ({ label }) => {
-  const { theme, setTheme, availableThemes } = useTheme();
-  const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
+export const ThemeSelector: React.FC<ThemeSelectorProps> = ({ label = '主题' }) => {
+  const { theme, setTheme } = useTheme();
+  
+  const themes = [
+    { id: 'light', name: '浅色', icon: 'sun' },
+    { id: 'dark', name: '深色', icon: 'moon' },
+    { id: 'system', name: '跟随系统', icon: 'monitor' }
+  ];
+  
+  // Helper function to get the current theme mode
+  const getThemeMode = () => {
+    if (typeof theme === 'string') {
+      return theme;
+    } else if (typeof theme === 'object' && theme !== null && 'mode' in theme) {
+      return theme.mode;
+    }
+    return 'light'; // Default fallback
   };
-
-  const handleThemeSelect = (selectedTheme: ThemeConfig) => {
-    setTheme(selectedTheme);
-    setIsOpen(false);
-  };
-
-  // 点击外部关闭下拉菜单
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
-
+  
+  const currentTheme = getThemeMode();
+  
   return (
-    <div className="theme-selector" ref={dropdownRef}>
-      <button className="theme-toggle" onClick={toggleDropdown}>
-        <span className="theme-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="12" cy="12" r="5"></circle>
-            <path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"></path>
-          </svg>
-        </span>
-        <span className="selected-theme">{label}</span>
-        <svg 
-          className={`dropdown-arrow ${isOpen ? 'open' : ''}`} 
-          viewBox="0 0 24 24"
-          width="16"
-          height="16"
-        >
-          <path d="M7 10l5 5 5-5z" fill="currentColor" />
-        </svg>
+    <div className="theme-selector">
+      <button className="theme-button">
+        <i className={`icon-${currentTheme === 'dark' ? 'moon' : 'sun'}`}></i>
+        {label && <span className="theme-label">{label}</span>}
       </button>
       
-      {isOpen && (
-        <div className="theme-menu">
-          {availableThemes.map(themeOption => (
-            <button
-              key={themeOption.id}
-              className={`theme-item ${themeOption.id === theme.id ? 'active' : ''}`}
-              onClick={() => handleThemeSelect(themeOption)}
+      <div className="theme-dropdown">
+        <ul>
+          {themes.map(item => (
+            <li 
+              key={item.id} 
+              className={currentTheme === item.id ? 'active' : ''}
+              onClick={() => setTheme(item.id as any)}
             >
-              <span 
-                className="theme-color" 
-                style={{ 
-                  background: themeOption.gradients.primary 
-                }}
-              ></span>
-              <span className="theme-name">{themeOption.name}</span>
-            </button>
+              <i className={`icon-${item.icon}`}></i>
+              <span>{item.name}</span>
+              {currentTheme === item.id && <i className="icon-check"></i>}
+            </li>
           ))}
-        </div>
-      )}
+        </ul>
+      </div>
     </div>
   );
 };

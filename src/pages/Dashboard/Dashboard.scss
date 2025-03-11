@@ -1,0 +1,76 @@
+@import '../../styles/variables.scss';
+
+.dashboard-container {
+  width: 100%;
+  height: 100%;
+  
+  .page-title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: var(--color-textPrimary);
+  }
+  
+  .loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    
+    .loading-spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid rgba(0, 0, 0, 0.1);
+      border-radius: 50%;
+      border-top-color: var(--color-primary);
+      animation: spin 1s ease-in-out infinite;
+      margin-bottom: 15px;
+    }
+    
+    p {
+      color: var(--color-textSecondary);
+    }
+  }
+  
+  .dashboard-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    
+    .dashboard-card {
+      background: var(--color-cardBackground);
+      border-radius: var(--border-radius-md);
+      padding: 20px;
+      box-shadow: var(--shadow-md);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--color-border);
+      
+      h2 {
+        font-size: 18px;
+        margin-bottom: 15px;
+        color: var(--color-textPrimary);
+      }
+      
+      p {
+        color: var(--color-textSecondary);
+        line-height: 1.6;
+      }
+    }
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .dashboard-container {
+    .dashboard-content {
+      grid-template-columns: 1fr;
+    }
+  }
+}

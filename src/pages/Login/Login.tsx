@@ -5,7 +5,10 @@ import { LanguageDropdown, Language } from '../../components/LanguageDropdown/La
 import { ThemeSelector } from '../../components/ThemeSelector/ThemeSelector';
 import { useTheme } from '../../contexts/ThemeContext';
 import { themes } from '../../config/themes';
+import { useNavigate } from 'react-router-dom';
+import CryptoJS from 'crypto-js';
 import './Login.scss';
+import { ThemeMode } from '../../contexts/ThemeContext';
 
 // 定义登录组件的属性接口
 interface LoginProps {
@@ -57,6 +60,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
   const [language, setLanguage] = useState<string>('zh');
   const [logoUrl, setLogoUrl] = useState<string | null>(null);
   const [systemTitle, setSystemTitle] = useState<string | null>(null);
+  const navigate = useNavigate(); // 添加导航钩子
   const [languages, setLanguages] = useState<Language[]>([
     { code: 'zh', name: '中文' },
     { code: 'en', name: 'English' }
@@ -135,20 +139,44 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
   const handleSubmit = async (username: string, password: string) => {
     setIsLoading(true);
     
-    // 模拟API调用
-    setTimeout(() => {
+    // 对密码进行加密
+    const encryptedPassword = CryptoJS.AES.encrypt(
+      password,
+      'your-secret-key' // 在实际应用中，这个密钥应该从环境变量或配置中获取
+    ).toString();
+    
+    // 模拟API调用，发送加密后的密码
+    try {
+      // 实际项目中，这里应该是真实的API调用
+      // const response = await api.login(username, encryptedPassword);
+      
+      // 模拟API调用
+      setTimeout(() => {
+        setIsLoading(false);
+        
+        // 登录成功后保存用户信息到本地存储
+        localStorage.setItem('user', JSON.stringify({ username, isLoggedIn: true }));
+        
+        // 调用父组件的onLogin回调（如果有）
+        if (onLogin) {
+          onLogin(username);
+        }
+        
+        // 跳转到仪表盘页面
+        navigate('/dashboard');
+      }, 1500);
+    } catch (error) {
       setIsLoading(false);
-      if (onLogin) {
-        onLogin(username);
-      }
-    }, 1500);
+      console.error('登录失败:', error);
+      // 这里可以添加错误处理逻辑
+    }
   };
   
   // 添加主题切换功能（可选）
   const handleThemeChange = (themeId: string) => {
-    const newTheme = themes[themeId];
-    if (newTheme) {
-      setTheme(newTheme);
+    // 确保 themeId 是有效的 ThemeMode 类型
+    if (themeId === 'light' || themeId === 'dark' || themeId === 'system') {
+      setTheme(themeId as ThemeMode);
     }
   };
 
@@ -157,14 +185,12 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
       <ParticleBackground />
       
       <div className="top-controls">
-        <div className="control-group">
-          <ThemeSelector label={t.themeSelector} />
-          <LanguageDropdown 
-            currentLanguage={language}
-            onLanguageChange={handleLanguageChange}
-            languages={languages}
-          />
-        </div>
+        <ThemeSelector label={t.themeSelector} />
+        <LanguageDropdown 
+          currentLanguage={language}
+          onLanguageChange={handleLanguageChange}
+          languages={languages}
+        />
       </div>
       
       <div className="login-content">

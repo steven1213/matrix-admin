@@ -1,7 +1,8 @@
-import { themes } from '../contexts/ThemeContext';
+import { themes } from '../config/themes';
 
 // Development environment config
 const config = {
+  env: 'development',
   apiBaseUrl: 'https://dev-api.example.com',
   defaultLanguage: 'zh',
   theme: themes.blue, // Development uses blue theme

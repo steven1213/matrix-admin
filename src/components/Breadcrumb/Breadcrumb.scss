@@ -1,0 +1,52 @@
+@import '../../styles/variables.scss';
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  font-size: 16px; // 增加字体大小
+  color: var(--color-textSecondary);
+  
+  .icon-home {
+    margin-right: 8px;
+    font-size: 18px; // 增加图标大小
+  }
+  
+  .breadcrumb-item {
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    
+    &.active {
+      color: var(--color-textPrimary);
+      font-weight: 500;
+    }
+  }
+  
+  .separator {
+    margin: 0 10px; // 增加间隔
+    font-size: 14px;
+    color: var(--color-textSecondary);
+    opacity: 0.6;
+    
+    i {
+      font-size: 12px; // 分隔符图标大小
+    }
+  }
+}
+
+// 响应式调整
+@media (max-width: 576px) {
+  .breadcrumb {
+    font-size: 14px;
+    
+    .icon-home {
+      font-size: 16px;
+    }
+    
+    .separator {
+      margin: 0 8px;
+      font-size: 12px;
+    }
+  }
+}

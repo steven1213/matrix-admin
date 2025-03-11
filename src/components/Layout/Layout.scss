@@ -1,0 +1,51 @@
+@import '../../styles/variables.scss';
+
+.layout {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--color-background);
+  color: var(--color-textPrimary);
+  position: relative; // 添加相对定位
+}
+
+.content-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  transition: margin-left 0.3s ease;
+  margin-left: 250px; // 与侧边栏宽度一致
+  min-height: 100vh;
+  
+  &.expanded {
+    margin-left: 80px; // 与折叠后的侧边栏宽度一致
+  }
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  
+  .page-content {
+    background: var(--color-cardBackground);
+    border-radius: var(--border-radius-md);
+    padding: 20px;
+    box-shadow: var(--shadow-md);
+    min-height: calc(100vh - 140px); // 调整高度
+    margin-top: 15px;
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--color-border);
+  }
+}
+
+// 响应式调整
+@media (max-width: 768px) {
+  .content-area {
+    margin-left: 0;
+    
+    &.expanded {
+      margin-left: 0;
+    }
+  }
+}
